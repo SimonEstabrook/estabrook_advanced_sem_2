@@ -14,18 +14,19 @@ public class InteractManager : MonoBehaviour {
 	public GameObject hitObject;
 	public GameObject HoldObject;
 	private bool HoldingObject = false;
+    Vector3 holdObjectRotation;
 
 	void Start () {
 		
 	}
 	
 	void Update () {
-		#region HOLDSTUFF
+		#region Highlight
 		Debug.DrawLine(MainCamera.transform.position, PickupPoint.transform.position, Color.cyan);
 		if(Physics.Linecast(MainCamera.transform.position, PickupPoint.transform.position, out PointedObject))
 		{
 			
-			if(PointedObject.transform.gameObject.tag == "Physics")
+			if(PointedObject.transform.gameObject.tag == "Physics" || PointedObject.transform.gameObject.tag == "Button")
 			{
 				hitObject = PointedObject.transform.gameObject;
 				if(lastHit != hitObject)
@@ -49,25 +50,39 @@ public class InteractManager : MonoBehaviour {
 			}
 			else
 			{
-				lastHit.layer = lastHitLayer;
-				hitObject = null;
-				lastHit = null;
-			}
+                if(lastHit != null)
+                {
+                    lastHit.layer = lastHitLayer;
+                    hitObject = null;
+                    lastHit = null;
+
+                }
+            }
 
 		}
 		#endregion
 
-		if(hitObject != null && Input.GetKeyDown(KeyCode.E) && !HoldingObject)
+		if(hitObject != null && Input.GetMouseButtonDown(0) && !HoldingObject)
 		{
-			HoldObject = hitObject;
 
-			HoldObject.transform.position = HoldPoint.transform.position;
-			HoldObject.transform.parent = HoldPoint.transform;
-			HoldingObject = true;
-			//hitObject.GetComponent<Rigidbody>().isKinematic = true;
-			HoldObject.GetComponent<Rigidbody>().useGravity = false;
-			HoldObject.GetComponent<Collider>().enabled = false;
-		}
+            if(hitObject.tag == "Physics")
+            {
+                HoldObject = hitObject;
+
+                HoldObject.transform.position = HoldPoint.transform.position;
+                HoldObject.transform.parent = HoldPoint.transform;
+                HoldingObject = true;
+                //hitObject.GetComponent<Rigidbody>().isKinematic = true;
+                HoldObject.GetComponent<Rigidbody>().useGravity = false;
+                HoldObject.GetComponent<Collider>().enabled = false;
+
+            }
+            else if(hitObject.tag == "Button")
+            {
+                hitObject.GetComponent<ButtonManager>().Function();
+            }
+
+        }
 
 		if(HoldingObject)
 		{
@@ -75,7 +90,7 @@ public class InteractManager : MonoBehaviour {
 		}
 		
 
-		if(HoldingObject && Input.GetKeyDown(KeyCode.R))
+		if(HoldingObject && Input.GetMouseButtonDown(1))
 		{
 			HoldObject.transform.parent = null;
 			HoldingObject = false;
@@ -84,6 +99,12 @@ public class InteractManager : MonoBehaviour {
 			HoldObject.GetComponent<Rigidbody>().useGravity = true;
 			HoldObject.GetComponent<Collider>().enabled = true;
 		}
+
+        if(Input.GetKeyDown(KeyCode.R) && HoldingObject)
+        {
+            HoldObject.transform.rotation = Quaternion.identity;
+            HoldObject.transform.Rotate(new Vector3(-90, 0, 0));
+        }
 
 	}
 }
