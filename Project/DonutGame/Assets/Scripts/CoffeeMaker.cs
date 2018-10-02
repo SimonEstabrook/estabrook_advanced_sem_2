@@ -4,23 +4,64 @@ using UnityEngine;
 
 public class CoffeeMaker : MonoBehaviour
 {
+    public enum TypeMachine
+    {
+        Coffee = 1,
+        Cream = 2
+    }
+
+    public TypeMachine whichType;
     public GameObject leftSpout, rightSpout;
 
-    public GameObject CoffeeObject;
+    public GameObject FullCup;
+    public GameObject CreamCup;
 
     public void CreateCoffee(ButtonManager.WhichSide s)
     {
-        for(int i = 0; i < 50; i++)
+        if (s == ButtonManager.WhichSide.Left)
         {
-            if (s == ButtonManager.WhichSide.Left)
+
+            RaycastHit cup;
+            if(Physics.Raycast(leftSpout.transform.position, Vector3.down, out cup, 20f))
             {
 
-                Instantiate(CoffeeObject, leftSpout.transform.position, CoffeeObject.transform.rotation);
+                if (cup.transform.gameObject.name.Contains("CoffeeCup_Empty"))
+                {
+                    Instantiate(FullCup, cup.transform.position, FullCup.transform.rotation);
+                    Destroy(cup.transform.gameObject);
+                }
+
             }
-            else
+        }
+        else
+        {
+            RaycastHit cup;
+            if (Physics.Raycast(rightSpout.transform.position, Vector3.down, out cup, 20f))
             {
-                Instantiate(CoffeeObject, rightSpout.transform.position, CoffeeObject.transform.rotation);
+                if (cup.transform.gameObject.name.Contains("CoffeeCup_Empty"))
+                {
+                    Instantiate(FullCup, cup.transform.position, FullCup.transform.rotation);
+                    Destroy(cup.transform.gameObject);
+                }
+            }
+            
+        }
 
+    }
+
+    public void AddCream()
+    {
+
+        RaycastHit cup;
+        if (Physics.Raycast(leftSpout.transform.position, Vector3.down, out cup, 20f))
+        {
+
+            if (cup.transform.gameObject.name.Contains("CoffeeCup_Full"))
+            {
+                Debug.Log("Is this activating?" + cup.transform.name);
+
+                Instantiate(CreamCup, cup.transform.position, FullCup.transform.rotation);
+                Destroy(cup.transform.gameObject);
             }
 
         }

@@ -6,7 +6,9 @@ public class ButtonManager : MonoBehaviour
 {
     public enum ButtonType
     {
-        CoffeeMaker = 0
+        CoffeeMaker = 0,
+        CupStack = 1,
+        Cream = 2
     }
 
     public enum WhichSide
@@ -18,10 +20,16 @@ public class ButtonManager : MonoBehaviour
     public WhichSide side;
     public ButtonType Type;
 
+    public GameObject emptyCup;
+
     private GameObject Parent;
     private void Start()
     {
-        Parent = transform.parent.gameObject;
+        if(transform.parent != null)
+        {
+            Parent = transform.parent.gameObject;
+
+        }
     }
 
     void Update()
@@ -37,6 +45,17 @@ public class ButtonManager : MonoBehaviour
                 if(Parent.GetComponent<CoffeeMaker>())
                 {
                     Parent.GetComponent<CoffeeMaker>().CreateCoffee(side);
+                }
+                break;
+            case ButtonType.CupStack:
+                InteractManager.instance.CreateCup(emptyCup);
+                break;
+            case ButtonType.Cream:
+
+                if (Parent.GetComponent<CoffeeMaker>())
+                {
+
+                    Parent.GetComponent<CoffeeMaker>().AddCream();
                 }
                 break;
 

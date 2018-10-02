@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InteractManager : MonoBehaviour {
 
+    public static InteractManager instance = null;
+
 	public GameObject PickupPoint, HoldPoint;
 	public GameObject MainCamera;
 
@@ -16,14 +18,24 @@ public class InteractManager : MonoBehaviour {
 	private bool HoldingObject = false;
     Vector3 holdObjectRotation;
 
-	void Start () {
-		
-	}
-	
-	void Update () {
+    public LayerMask mask;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void Update () {
 		#region Highlight
 		Debug.DrawLine(MainCamera.transform.position, PickupPoint.transform.position, Color.cyan);
-		if(Physics.Linecast(MainCamera.transform.position, PickupPoint.transform.position, out PointedObject))
+		if(Physics.Linecast(MainCamera.transform.position, PickupPoint.transform.position, out PointedObject, mask, QueryTriggerInteraction.Collide))
 		{
 			
 			if(PointedObject.transform.gameObject.tag == "Physics" || PointedObject.transform.gameObject.tag == "Button")
@@ -107,4 +119,14 @@ public class InteractManager : MonoBehaviour {
         }
 
 	}
+
+    public void CreateCup(GameObject g)
+    {
+        HoldingObject = true;
+        HoldObject = Instantiate(g, HoldPoint.transform.position, g.transform.rotation);
+        HoldObject.transform.parent = HoldPoint.transform;
+        HoldObject.GetComponent<Rigidbody>().useGravity = false;
+        HoldObject.GetComponent<Collider>().enabled = false;
+
+    }
 }

@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: a30df0e5a766dbe4ab0a3c68a5d2c6b8
+guid: e3a8f63f243b26f4aa8a5527b9949d8f
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: M_1
-    2100002: M_2
-    2100004: M_3
+    2100000: No Name
+    2100002: M_1
+    2100004: M_2
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cylinder.003
+    4300000: Donut_3
   externalObjects: {}
   materials:
     importMaterials: 1
