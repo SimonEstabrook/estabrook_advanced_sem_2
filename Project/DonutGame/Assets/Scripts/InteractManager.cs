@@ -83,6 +83,8 @@ public class InteractManager : MonoBehaviour {
 
                 HoldObject.transform.position = HoldPoint.transform.position;
                 HoldObject.transform.parent = HoldPoint.transform;
+				HoldObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+				HoldObject.GetComponent<Rigidbody>().rotation = Quaternion.Euler(Vector3.zero);
                 HoldingObject = true;
                 //hitObject.GetComponent<Rigidbody>().isKinematic = true;
                 HoldObject.GetComponent<Rigidbody>().useGravity = false;

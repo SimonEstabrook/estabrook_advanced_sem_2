@@ -213,7 +213,10 @@ MonoBehaviour:
   leftSpout: {fileID: 7889971762471782093}
   rightSpout: {fileID: 7889971762009504134}
   FullCup: {fileID: 747661261941917254, guid: ffc8f7115be3069448afcebe1acc975f, type: 3}
-  CreamCup: {fileID: 0}
+  CreamCup: {fileID: 747661261941917254, guid: 807cf5318285e18468909798ed2754e0, type: 3}
+  IceCup: {fileID: 328145125270566312, guid: 0aa49b0fd7ecbb14aa0e793b63f59fbf, type: 3}
+  FullIceCup: {fileID: 7655638440323155651, guid: dc87043bcf05e954db134f75e71e41d7, type: 3}
+  FullIceCreamCup: {fileID: 7655638440323155651, guid: 3b57e89b7fa8678438fab39213ccfb86, type: 3}
 --- !u!1 &7889971762799238276 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 913f3f02eb105934597436d559e1fb79, type: 3}

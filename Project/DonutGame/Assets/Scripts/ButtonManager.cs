@@ -8,7 +8,10 @@ public class ButtonManager : MonoBehaviour
     {
         CoffeeMaker = 0,
         CupStack = 1,
-        Cream = 2
+        Cream = 2,
+		Ice = 3,
+		OvenDoor = 4,
+		OvenButton = 5
     }
 
     public enum WhichSide
@@ -51,13 +54,24 @@ public class ButtonManager : MonoBehaviour
                 InteractManager.instance.CreateCup(emptyCup);
                 break;
             case ButtonType.Cream:
-
                 if (Parent.GetComponent<CoffeeMaker>())
                 {
 
                     Parent.GetComponent<CoffeeMaker>().AddCream();
                 }
                 break;
+			case ButtonType.Ice:
+				if(Parent.GetComponent<CoffeeMaker>())
+				{
+					Parent.GetComponent<CoffeeMaker>().AddIce();
+				}
+				break;
+			case ButtonType.OvenDoor:
+				if(GetComponent<OvenManager>())
+				{
+					GetComponent<OvenManager>().OpenDoor();
+				}
+				break;
 
         }
     }
