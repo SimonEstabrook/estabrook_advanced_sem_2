@@ -18,6 +18,8 @@ public class OvenManager : MonoBehaviour
 	public GameObject Light;
 	public Material LightColorOn, LightColorOff;
 
+	public List<GameObject> CookedFoods;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +65,23 @@ public class OvenManager : MonoBehaviour
 		if(!isOn)
 		{
 			isOpen = isOpen ? false : true;
+		}
+	}
+
+	public void CookFood()
+	{
+		Debug.Log("Finds Function");
+		if(isFull && !isOpen)
+		{
+			Debug.Log("Oven Ready");
+			GameObject Contents = trigger.hitObjects[0];
+			if (Contents.name.Contains("Hashbrowns"))
+			{
+				Debug.Log("Has hashbrowns");
+				Instantiate(CookedFoods[0], Contents.transform.position, Contents.transform.rotation);
+				trigger.hitObjects.Remove(Contents);
+				Destroy(Contents.gameObject);
+			}
 		}
 	}
 

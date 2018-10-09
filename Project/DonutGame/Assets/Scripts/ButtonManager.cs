@@ -11,7 +11,8 @@ public class ButtonManager : MonoBehaviour
         Cream = 2,
 		Ice = 3,
 		OvenDoor = 4,
-		OvenButton = 5
+		OvenButton = 5,
+		Box = 6
     }
 
     public enum WhichSide
@@ -71,6 +72,19 @@ public class ButtonManager : MonoBehaviour
 				{
 					GetComponent<OvenManager>().OpenDoor();
 				}
+				break;
+			case ButtonType.OvenButton:
+				Debug.Log("Finds Button");
+				if(Parent.GetComponent<OvenManager>())
+				{
+					Debug.Log("is child");
+					Parent.GetComponent<OvenManager>().CookFood();
+				}
+				break;
+			case ButtonType.Box:
+				
+				InteractManager.instance.CreateCup(emptyCup);
+				
 				break;
 
         }

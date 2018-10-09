@@ -108,4 +108,9 @@ public class CoffeeMaker : MonoBehaviour
 
 		}
 	}
+
+	public void AddItem()
+	{
+		
+	}
 }
