@@ -35,7 +35,8 @@ public class ColliderCheck : MonoBehaviour
 	private void OnTriggerExit(Collider other)
 	{
 		Debug.Log("Out " + other.gameObject.name);
-		hitObjects.Remove(other.gameObject);
+		//hitObjects.Remove(other.gameObject);
+		hitObjects = new List<GameObject>();
 	}
 
 }

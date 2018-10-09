@@ -88,7 +88,7 @@ public class InteractManager : MonoBehaviour {
                 HoldingObject = true;
                 //hitObject.GetComponent<Rigidbody>().isKinematic = true;
                 HoldObject.GetComponent<Rigidbody>().useGravity = false;
-                HoldObject.GetComponent<Collider>().enabled = false;
+                HoldObject.GetComponent<MeshCollider>().enabled = false;
 
             }
             else if(hitObject.tag == "Button")
