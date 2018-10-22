@@ -19,6 +19,8 @@ public class CoffeeMaker : MonoBehaviour
 	public GameObject IceCup;
 	public GameObject FullIceCup;
 	public GameObject FullIceCreamCup;
+	public GameObject FullMilkCup;
+	public GameObject FullLatteCup;
 
     public void CreateCoffee(ButtonManager.WhichSide s)
     {
@@ -103,6 +105,42 @@ public class CoffeeMaker : MonoBehaviour
 				Debug.Log("Is this activating?" + cup.transform.name);
 
 				Instantiate(IceCup, cup.transform.position, FullCup.transform.rotation);
+				Destroy(cup.transform.gameObject);
+			}
+
+		}
+	}
+
+	public void FillMilk()
+	{
+		Debug.Log("Check");
+		RaycastHit cup;
+		if (Physics.Raycast(rightSpout.transform.position, Vector3.down, out cup, 20f))
+		{
+
+			if (cup.transform.gameObject.name.Contains("MilkCup_Empty"))
+			{
+				Debug.Log("Is this activating?" + cup.transform.name);
+
+				Instantiate(FullMilkCup, cup.transform.position, FullMilkCup.transform.rotation);
+				Destroy(cup.transform.gameObject);
+			}
+
+		}
+	}
+
+	public void Espresso()
+	{
+		Debug.Log("Check");
+		RaycastHit cup;
+		if (Physics.Raycast(leftSpout.transform.position, Vector3.down, out cup, 20f))
+		{
+
+			if (cup.transform.gameObject.name.Contains("Latte_Empty"))
+			{
+				Debug.Log("Is this activating?" + cup.transform.name);
+
+				Instantiate(FullLatteCup, cup.transform.position, FullLatteCup.transform.rotation);
 				Destroy(cup.transform.gameObject);
 			}
 
